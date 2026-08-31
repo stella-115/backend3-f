@@ -1,0 +1,11 @@
+import { Outlet } from "react-router-dom"
+
+const SignupLayout = () => {
+  return (
+    <div>
+        <Outlet/>
+    </div>
+  )
+}
+
+export default SignupLayout
