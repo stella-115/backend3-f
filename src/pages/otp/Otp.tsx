@@ -3,15 +3,18 @@ import { login } from "../../global/reduxSlice";
 // import { verifyOtp } from "../../utils/api"; // 👈 you'll need to create this API function
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { verifyOtp } from "../../utils/api";
 
 const Otp = () => {
    const navigate = useNavigate ()
   
       const dispatch = useDispatch ()
+
+      const location = useLocation ()
       
-      const [email, setEmail] = useState("")
+      // const [email, setEmail] = useState("")
+       const email = location.state?.email || "";
   
       const [otp, setOtp] = useState("")
   
@@ -19,6 +22,11 @@ const Otp = () => {
   
       const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
+          if (!email) {
+      toast.error("Email is missing. Please sign up again.");
+      return;
+    }
+
             if (otp.length !== 6 || !/^\d{6}$/.test(otp)) {
       toast.error("Please enter a valid 6-digit OTP.");
       return;
@@ -71,22 +79,17 @@ const Otp = () => {
 
             {/* Email Input */}
             <div>
-              <h1 className="text-white md:text-[20px] mt-5">Email Address</h1>
-              <div className="w-full h-10 rounded-[7px] border border-white mt-5">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="your@email.com"
-                  className="text-white p-3 outline-none w-full rounded-[7px] bg-transparent"
-                />
-              </div>
+              {/* Show the email here */}
+            {email && (
+              <h1 className="text-white text-center font-bold md:text-[16px] text-[14px] mt-2">
+                {email}
+              </h1>
+              )}
             </div>
 
             {/* OTP Input */}
             <div>
-              <h1 className="text-white md:text-[20px] mt-5">6-Digit OTP</h1>
+              <h1 className="text-white md:text-[20px] mt-20">6-Digit OTP</h1>
               <div className="w-full h-10 rounded-[7px] border border-white mt-5">
                 <input
                   type="text"

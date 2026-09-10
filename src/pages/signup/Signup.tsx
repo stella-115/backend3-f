@@ -45,7 +45,7 @@ const Signup = () => {
 
             console.log("data", data)
 
-            navigate("/otp")
+            navigate("/otp",  { state: { email: email } })
         }
         catch (error: any) {
             // console.error(error)
@@ -98,7 +98,7 @@ const Signup = () => {
               </h1>
             </div>
 
-             <div>
+             {/* <div>
               <h1  className=" text-white md:text-[20px] mt-5">
                 Role
               </h1>
@@ -111,6 +111,27 @@ const Signup = () => {
                 placeholder="landlord or tenant?"
                  required className="text-white p-3 outline-none rounded-[7px] w-full"/>
               </h1>
+            </div> */}
+
+            <div>
+            <h1 className="text-white md:text-[20px] mt-5">
+             Role
+             </h1>
+            <h1 className="w-full h-10 rounded-[7px] border border-white mt-5">
+                  <input
+                  type="text"
+                  list="roles"
+                  value={role}
+                onChange={(e) => setrole(e.target.value)}
+                placeholder="select if landlord or tenant?"
+                     required
+                 className="text-white p-3 outline-none rounded-[7px] w-full"
+                      />
+          <datalist id="roles">
+              <option value="landlord" />
+               <option value="tenant" />
+              </datalist>
+             </h1>
             </div>
             <div className="text-white mt-2 ">
                  <input type="checkbox"
