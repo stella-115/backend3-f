@@ -71,7 +71,7 @@ const Signup = () => {
 
                      <div>
               <h1  className=" text-white md:text-[20px] mt-5 ">
-                Email Address
+                Your Email Address
               </h1>
               <h1 className="w-full h-10 rounded-[7px] border border-white mt-5">
                 <input type="text" 
